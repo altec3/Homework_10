@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, abort
+
 from utils import load_json, preformat_candidates, get_candidate_by_id, get_candidate_by_skill
 
 
@@ -25,7 +26,7 @@ def page_candidate(uid: int):
     """
     candidate: list = get_candidate_by_id(uid)
     if candidate is None:
-        return f"404 Not Found - The requested URL /candidates/{uid}.html was not found on this server"
+        abort(404)
     else:
         return f"<pre>\n" \
                f"<img src={candidate[0]['picture']}></img>\n" \
